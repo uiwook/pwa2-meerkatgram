@@ -123,11 +123,11 @@ const User = {
     return define;
   },
   associate: (db) => {
-    db.User.hasMany(db.Post, { sourceKey: 'id', foreignKey: 'user_id', as: 'posts'}),
-    db.User.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'user_id', as: 'likes'}),
-    db.User.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'user_id', as: 'comments'}),
-    db.User.hasMany(db.PushSubscription, { sourceKey: 'id', foreignKey: 'user_id', as: 'push_subscriptions'}),
-    db.User.hasMany(db.Notification, { sourceKey: 'id', foreignKey: 'user_id', as: 'notifications'});
+    db.User.hasMany(db.Post, { sourceKey: 'id', foreignKey: 'userId', as: 'posts'}),
+    db.User.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'userId', as: 'likes'}),
+    db.User.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'userId', as: 'comments'}),
+    db.User.hasMany(db.PushSubscription, { sourceKey: 'id', foreignKey: 'userId', as: 'push_subscriptions'}),
+    db.User.hasMany(db.Notification, { sourceKey: 'id', foreignKey: 'userId', as: 'notifications'});
   },
 }
 

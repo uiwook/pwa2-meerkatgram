@@ -87,9 +87,9 @@ const Post = {
     return define
   },
   associate: (db) => {
-    db.User.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'user_id', as: 'users'}),
-    db.Post.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'post_id', as: 'likes'}),
-    db.Post.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'post_id', as: 'comments'});
+    db.User.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'userId', as: 'users'}),
+    db.Post.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'postId', as: 'likes'}),
+    db.Post.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'postId', as: 'comments'});
   },
 }
 
