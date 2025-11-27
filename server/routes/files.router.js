@@ -6,10 +6,12 @@
 
 import express from 'express';
 import multerMiddleware from '../app/middlewares/multer/multer.middleware.js';
+import authMiddleware from '../app/middlewares/auth/auth.middleware.js';
+import filesController from '../app/controllers/files.controller.js';
 
 const filesRouter = express.Router();
 
-filesRouter.post('/posts', multerMiddleware.postUploader); // TODO: 컨트롤러 입력
-filesRouter.post('/propiles', multerMiddleware.profileUploader); // TODO: 컨트롤러 입력
+filesRouter.post('/posts', authMiddleware, multerMiddleware.postUploader, filesController.storePost);
+filesRouter.post('/propiles', authMiddleware, multerMiddleware.profileUploader, filesController.storeProfile);
 
 export default filesRouter;

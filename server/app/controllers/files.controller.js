@@ -4,21 +4,59 @@
  * 251127 v1.0.0 wook init
  */
 
+import { BAD_FILE_ERROR, SUCCESS } from "../../configs/responseCode.config";
+import myError from "../errors/customs/my.error";
+import { createBaseResponse } from "../utils/createBaseResponse.util";
+
 // ----------------
 // ---- public ----
 // ----------------
 /**
  * 게시글 이미지 업로드 컨트롤러 처리
- * @param {import("express").Request} req - 리퀘스트 객체
- * @param {import("express").Response} res - 레스폰스 객체
- * @param {import("express").NextFunction} next - next 객체
+ * @param {import("express").Request} req - Request 객체
+ * @param {import("express").Response} res - Response 객체
+ * @param {import("express").NextFunction} next - NextFunction 객체
  * @return {import("express").Response}
  */
 async function storePost(req, res, next) {
+  try {
+    // 파일 여부 확인
+    if(!req.file) {
+      throw myError('파일 없음', BAD_FILE_ERROR);
+    }
 
-  return res.status().send();
+    const result = {
+      path: `${process.env.APP_URL}${process.env.ACCESS_FILE_POST_IMAGE_PATH}/${req.file.filename}`
+    };
+    return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result));
+  } catch(error) {
+    next(error);
+  }
 }
 
+// 유저 프로필 업로드 컨트롤러
+
+async function storeProfile(req, res, next) {
+  try {
+    // 파일 여부 확인
+    if(!req.file) {
+      throw myError('파일 없음', BAD_FILE_ERROR);
+    }
+
+    const result = {
+      path: `${process.env.APP_URL}${process.env.ACCESS_FILE_USER_PROFILE_PATH}/${req.file.filename}`
+    };
+
+    return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result));
+  } catch(error) {
+    next(error);
+  }
+}
+
+export default {
+  storePost,
+  storeProfile,
+}
 /**
  * index : 데이터 조회 처리 (리스트 페이지 or 리스트 데이터 획득)
  * show : 상세 데이터 조회 (상세 페이지 or 상세 데이터 획득)
