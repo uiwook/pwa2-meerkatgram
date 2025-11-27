@@ -11,6 +11,7 @@ import errorHandler from './app/errors/errorHandler.js';
 import swaggerUi from 'swagger-ui-express';
 import SwaggerParser from 'swagger-parser';
 import path from 'path';
+import filesRouter from './routes/files.router.js';
 
 
 const app = express();
@@ -28,6 +29,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 // 라우터 정의
 // ---------------------
 app.use('/api/auth', authRouter);
+app.use('/api/files', filesRouter);
 
 // 에러 핸들러 등록
 app.use(errorHandler);
