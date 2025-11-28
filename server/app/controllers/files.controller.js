@@ -4,10 +4,9 @@
  * 251127 v1.0.0 wook init
  */
 
-import { BAD_FILE_ERROR, SUCCESS } from "../../configs/responseCode.config";
-import myError from "../errors/customs/my.error";
-import { createBaseResponse } from "../utils/createBaseResponse.util";
-
+import { BAD_FILE_ERROR, SUCCESS } from "../../configs/responseCode.config.js";
+import myError from "../errors/customs/my.error.js";
+import { createBaseResponse } from "../utils/createBaseResponse.util.js";
 // ----------------
 // ---- public ----
 // ----------------
@@ -44,7 +43,7 @@ async function storeProfile(req, res, next) {
     }
 
     const result = {
-      path: `${process.env.APP_URL}${process.env.ACCESS_FILE_USER_PROFILE_PATH}/${req.file.filename}`
+      path: `${process.env.APP_URL}${process.env.FILE_USER_PROFILE_PATH}/${req.file.filename}`
     };
 
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result));
@@ -57,6 +56,7 @@ export default {
   storePost,
   storeProfile,
 }
+
 /**
  * index : 데이터 조회 처리 (리스트 페이지 or 리스트 데이터 획득)
  * show : 상세 데이터 조회 (상세 페이지 or 상세 데이터 획득)
