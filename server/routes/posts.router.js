@@ -10,12 +10,15 @@ import indexValidator from '../app/middlewares/validations/validators/post/index
 import validationHandler from '../app/middlewares/validations/validationHandler.js';
 import authMiddleware from '../app/middlewares/auth/auth.middleware.js';
 import showValidator from '../app/middlewares/validations/validators/post/show.validator.js';
+import storeValidator from '../app/middlewares/validations/validators/post/store.validator.js';
+import destroyValidator from '../app/middlewares/validations/validators/post/destroy.validator.js';
 
 const postsRouter = express.Router();
 
 postsRouter.get('/', indexValidator, validationHandler, postsController.index);
 postsRouter.get('/:id', authMiddleware, showValidator, validationHandler, postsController.show);
-// postsRouter.post('/', )
-// postsRouter.delete('/:id', )
+postsRouter.post('/', authMiddleware, storeValidator, validationHandler, postsController.store);
+postsRouter.delete('/:id', authMiddleware, destroyValidator, validationHandler, postsController.destroy);
+
 
 export default postsRouter;
