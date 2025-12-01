@@ -13,8 +13,6 @@ import authMiddleware from '../app/middlewares/auth/auth.middleware.js';
 const authRouter = express.Router();
 
 authRouter.post('/login', loginValidator, validationHandler, authController.login);
-authRouter.post('/reissue', authMiddleware, (req, res, next) => {
-  return res.send('reissue test');
-});
+authRouter.post('/reissue', authController.reissue)
 
 export default authRouter;
