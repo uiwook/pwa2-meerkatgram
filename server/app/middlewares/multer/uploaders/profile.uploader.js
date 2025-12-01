@@ -52,7 +52,7 @@ export default function(req, res, next) {
     }),
     // fileFileter: 파일 필터링 처리를 제어하는 프로퍼티
     fileFilter: (req, file, callback) => {
-      if(file.mimetype.startsWith('image/')) {
+      if(!file.mimetype.startsWith('image/')) {
         return callback(myError('이미지 파일 아님', BAD_FILE_ERROR));
       }
       callback(null, true);
