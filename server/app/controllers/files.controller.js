@@ -43,7 +43,7 @@ async function storeProfile(req, res, next) {
     }
 
     const result = {
-      path: `${process.env.APP_URL}${process.env.FILE_USER_PROFILE_PATH}/${req.file.filename}`
+      path: `${process.env.APP_URL}${process.env.ACCESS_FILE_USER_PROFILE_PATH}/${req.file.filename}`
     };
 
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result));
