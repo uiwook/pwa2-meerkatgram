@@ -20,11 +20,13 @@ async function index(req, res, next) {
   try {
     const page = req.query?.page ? parseInt(req.query?.page) : 1;
 
-    const result = await postsService.pagination(page);
+    const { count, rows } = await postsService.pagination(page);
 
     const responseData = {
       page: page,
-      posts: result
+      posts: rows,
+      limit: 6,
+      count: count,
     };
 
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, responseData));

@@ -14,7 +14,7 @@ const { sequelize, Post, Comment } = db;
  * @returns {Promise<Array<import("../models/Post.js").Post>>}
  */
 async function pagination(t = null, data) {
-  return await Post.findAll(
+  return await Post.findAndCountAll(
     {
       order: [
         ['createdAt', 'DESC'],
@@ -22,12 +22,9 @@ async function pagination(t = null, data) {
         ['id', 'ASC']
       ],
       limit: data.limit,
-      offset: data.offset
-    },
-    {
+      offset: data.offset,
       transaction: t,
-    }
-  )
+    })
 }
 
 /**
