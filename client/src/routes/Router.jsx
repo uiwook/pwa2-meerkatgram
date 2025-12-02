@@ -32,11 +32,11 @@ const router = createBrowserRouter([
         element: <PostCreate />
       },
       {
-        path: '/posts/:id',
+        path: '/posts/show/:id',
         element: <PostsShow />
       },
       {
-        path: '/userinfo',
+        path: '/users/:id',
         element: <UserInfo />
       },
       {
