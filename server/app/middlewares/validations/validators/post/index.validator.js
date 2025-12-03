@@ -1,5 +1,5 @@
 /**
- * @file app/middlewares/validations/validaors/auth/index.validator.js
+ * @file app/middlewares/validations/validaors/post/index.validator.js
  * @description 게시글 인덱스 검사기
  * 251128 v1.0.0 wook init
  */

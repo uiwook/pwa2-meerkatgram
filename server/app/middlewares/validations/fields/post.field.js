@@ -28,7 +28,7 @@ export const id = param('id')
   .toInt();
 
   
-  // 게시글 업로드 내용 필드
+// 게시글 업로드 내용 필드
 export const content = body('content')
   .trim()
   .notEmpty()
@@ -37,7 +37,7 @@ export const content = body('content')
   .matches(/^.{0,100}$/)
   .withMessage('100자 미만으로 입력 해 주세요.');
 
-  // 게시글 업로드 이미지 필드
+// 게시글 업로드 이미지 필드
 export const image = body('image')
   .trim()
   .notEmpty()

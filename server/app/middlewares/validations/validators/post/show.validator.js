@@ -1,5 +1,5 @@
 /**
- * @file app/middlewares/validations/validaors/auth/show.validator.js
+ * @file app/middlewares/validations/validaors/post/show.validator.js
  * @description 게시글 show 검사기
  * 251128 v1.0.0 wook init
  */
