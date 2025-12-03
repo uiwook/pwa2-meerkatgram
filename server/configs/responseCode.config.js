@@ -123,7 +123,7 @@ const REISSUE_ERROR = {
 Object.freeze(REISSUE_ERROR);
 
 /**
- * 전역 응답 코드 설정
+ * 전역 응답 코드 설정 - 경로 못찾음
  * @type {ResponseCodeConfig}
  */
 const NOT_FOUND_ERROR = {

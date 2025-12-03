@@ -8,22 +8,27 @@ import db from '../models/index.js';
 const { sequelize, Comment } = db;
 
 /**
- * 게시글 작성
+ * 게시글 삭제
  * @param {import("sequelize").Transaction|null} t 
- * @param {import("../services/posts.service.js").PostStoreData} data 
+ * @param {import("../services/posts.service.js").PostStoreData} id 
  * @returns {Promise<import("../models/Comment.js").Comment>}
  */
 async function destroy(t = null, id) {
   return await Comment.destroy(
     {
       where: {
-        id: id,
+        postId: id,
       },
       transaction: t
     }
   )
 }
 
+async function create(t = null, data) {
+  return await Comment.create(data, {transaction: t});
+}
+
 export default {
   destroy,
+  create,
 }
