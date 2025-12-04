@@ -6,6 +6,7 @@ import UserInfo from "../components/users/UserInfo.jsx";
 import Registration from "../components/users/Registration.jsx";
 import PostsShow from "../components/posts/PostShow.jsx";
 import PostCreate from "../components/posts/PostCreate.jsx";
+import Social from "../components/auth/Social.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         element: <Registration />
       },
     ]
+  },
+  {
+    path: '/callback/social',
+    element: <Social />
   }
 ]);
 

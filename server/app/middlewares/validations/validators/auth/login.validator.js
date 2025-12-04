@@ -4,6 +4,6 @@
  * 251119 v1.0.0 wook init
  */
 
-import { email, password } from "../../fields/user.field.js";
+import userField from "../../fields/user.field.js";
 
-export default [email, password];
+export default [userField.email, userField.password];
