@@ -67,7 +67,7 @@ async function reissue(req, res, next) {
 }
 
 /**
- * 로그인 컨트롤러 처리
+ * 소셜로그인 컨트롤러 처리
  * @param {import("express").Request} req - 리퀘스트 객체
  * @param {import("express").Response} res - 레스폰스 객체
  * @param {import("express").NextFunction} next - next 객체
