@@ -12,6 +12,6 @@ import filesController from '../app/controllers/files.controller.js';
 const filesRouter = express.Router();
 
 filesRouter.post('/posts', authMiddleware, multerMiddleware.postUploader, filesController.storePost);
-filesRouter.post('/propiles', authMiddleware, multerMiddleware.profileUploader, filesController.storeProfile);
+filesRouter.post('/profiles', authMiddleware, multerMiddleware.profileUploader, filesController.storeProfile);
 
 export default filesRouter;

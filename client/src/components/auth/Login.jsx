@@ -9,6 +9,10 @@ export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  function redirectRegistration() {
+    navigate('/registration');
+  }
   
   async function handleLogin(e) {
     // 기존 이벤트 취소
@@ -36,7 +40,7 @@ export default function Login() {
         <button type="submit" className="btn-big bg-gray">Log in</button>
         <div className="text-on-line">or</div>
         <button type="button" className="btn-big bg-img-kakao" onClick={() => {handleSocial('kakao')}} ></button>
-        <button type="button" className="btn-big bg-light">Sign up</button>
+        <button type="button" className="btn-big bg-light" onClick={() => redirectRegistration()}>Sign up</button>
       </form>
     </>
   )
