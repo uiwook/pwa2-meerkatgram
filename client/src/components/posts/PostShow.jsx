@@ -2,20 +2,27 @@ import { useEffect, useState } from 'react';
 import PostComment from './comments/PostComment.jsx';
 import './PostShow.css';
 import PostDelete from './PostDelete.jsx';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postShowThunk } from '../../store/thunks/postShowThunk.js';
 import { clearPostShow } from '../../store/slices/postShowSlice.js';
 
 export default function PostsShow() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { show } = useSelector(state => state.postShow);
   const [openDeleteFlg, setOpenDeleteFlg] = useState(false);
 
   useEffect(() => {
-    dispatch(postShowThunk(id));
-
+    async function test() {
+      const result = await dispatch(postShowThunk(id));
+      if(result.type.endsWith('/rejected')) {
+        alert('없는 페이지입니다.')
+        navigate('/posts')
+      }
+    }
+    test()
     return () => {
       dispatch(clearPostShow());
     }
@@ -50,7 +57,7 @@ export default function PostsShow() {
         )
       }
       {
-        openDeleteFlg && <PostDelete setCloseDeleteModal={closeDeleteModal} />
+        openDeleteFlg && <PostDelete id={ id } setCloseDeleteModal={closeDeleteModal} />
       }
     </>
   )

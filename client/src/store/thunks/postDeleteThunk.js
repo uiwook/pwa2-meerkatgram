@@ -1,16 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../api/axiosInstance.js";
 
-export const postShowThunk = createAsyncThunk(
-  'postShow/postShowThunk', // Thunk 고유명
+export const postDeleteThunk = createAsyncThunk(
+  'postDelete/postDeleteThunk', // Thunk 고유명
   async (id, { rejectWithValue }) => {
     try {
       const url = `/api/posts/${id}`;
       
-      const response = await axiosInstance.get(url);
-      if(!response.data.data) {
-        throw new Error('게시글 삭제 됨');
-      }
+      const response = await axiosInstance.delete(url);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error);
