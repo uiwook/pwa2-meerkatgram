@@ -57,6 +57,14 @@ async function login(body) {
 }
 
 /**
+ * 로그아웃 처리
+ * @param {number} id - 유저id
+ */
+async function logout(id) {
+  return await userRepository.logout(null, id);
+}
+
+/**
  * 토큰 재발급 처리
  * @param {string} token 
  */
@@ -154,6 +162,7 @@ async function socialKaKao(code) {
 
 export default {
   login,
+  logout,
   reissue,
   socialKaKao,
 }

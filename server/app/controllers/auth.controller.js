@@ -21,19 +21,42 @@ import socialKakaoUtil from "../utils/social/social.kakao.util.js";
  * @param {import("express").Response} res - 레스폰스 객체
  * @param {import("express").NextFunction} next - next 객체
  * @return {import("express").Response}
- */
+*/
 async function login(req, res, next) {
   try {
     const body = req.body; // 파라미터 획득
     // 로그인 서비스 호출
     const { accessToken, refreshToken, user } = await authService.login(body);
-
+    
     // Cookie에 RefreshToken 설정
     cookieUtil.setCookieRefreshToken(res, refreshToken);
-
+    
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, {accessToken, user}));
   } catch(error) {
     next(error);
+  }
+}
+
+/**
+ * 로그인 컨트롤러 처리
+ * @param {import("express").Request} req - 리퀘스트 객체
+ * @param {import("express").Response} res - 레스폰스 객체
+ * @param {import("express").NextFunction} next - next 객체
+ * @return {import("express").Response}
+*/
+async function logout(req, res, next) {
+  try {
+    const id = req.user.id;
+
+    // 로그아웃 서비스 호출
+    await authService.logout(id);
+
+    // cookie에 refreshToken 만료
+    cookieUtil.clearCookieRefreshToken(res);
+
+    return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS));
+  } catch (error) {
+    return next(error);
   }
 }
 
@@ -128,6 +151,7 @@ async function socialCallback(req, res, next) {
 // -------------
 export default {
   login,
+  logout,
   reissue,
   social,
   socialCallback,

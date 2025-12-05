@@ -9,7 +9,7 @@ export default function PostCreate() {
   const navigate = useNavigate();
   const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState('');
+  const [preview, setPreview] = useState(null);
 
   async function handleCreate(e) {
     e.preventDefault();
