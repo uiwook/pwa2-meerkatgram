@@ -67,9 +67,29 @@ async function destroy({ userId, postId }) {
   })
 }
 
+async function update(data) {
+  return await db.sequelize.transaction(async t => {
+
+  const likeYN = await likeRepository.findLikeYN(t, data)
+  // postId안에 해당하는 userId가 없을 시 insert처리
+  if(!likeYN) {
+    await likeRepository.create(t, data)
+    // postId안에 해당하는 userId가 있을 시 destroy처리
+  } else if(likeYN) {
+    await likeRepository.destroyLike(t, data)
+  }
+  // postId로 묶고, postId에 좋아요 되어있는 userId갯수 가져오는 처리
+  return {
+    cnt: await likeRepository.show(t, data)
+  }
+  });
+}
+
+
 export default {
   pagination,
   show,
   create,
   destroy,
+  update,
 }

@@ -97,9 +97,30 @@ async function destroy(req, res, next) {
   }
 }
 
+/**
+ * 게시글 삭제 컨트롤러
+ * @param {import("express").Request} req - Request 객체
+ * @param {import("express").Request} res - Response 객체
+ * @param {import("express").NextFunction} next - NextFunction 객체
+ * @returns 
+ */
+async function update(req, res, next) {
+  try {
+    const data = {
+      userId: req.user.id,
+      postId: req.params.id
+    }
+    const result = await postsService.update(data);
+      return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result))
+  } catch (error) {
+    return next(error)
+  }
+}
+
 export default {
   index,
   show,
   store,
   destroy,
+  update,
 }

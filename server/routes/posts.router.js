@@ -17,6 +17,7 @@ const postsRouter = express.Router();
 
 postsRouter.get('/', indexValidator, validationHandler, postsController.index);
 postsRouter.get('/:id', authMiddleware, showValidator, validationHandler, postsController.show);
+postsRouter.put('/:id', authMiddleware, showValidator, validationHandler, postsController.update);
 postsRouter.post('/', authMiddleware, storeValidator, validationHandler, postsController.store);
 postsRouter.delete('/:id', authMiddleware, destroyValidator, validationHandler, postsController.destroy);
 

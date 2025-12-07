@@ -25,7 +25,7 @@ const ROLE_PERMISSIONS = {
   ],
   PUT: [
     { path: /^\/api\/users$/, roles: [NORMAL, SUPER] },
-    
+    { path: /^\/api\/posts\/[0-9]+$/, roles: [NORMAL, SUPER] },
   ],
   DELETE: [
     { path: /^\/api\/posts\/[0-9]+$/, roles: [NORMAL, SUPER] },
