@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PostComment from './comments/PostComment.jsx';
 import './PostShow.css';
 import PostDelete from './PostDelete.jsx';
@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postShowThunk } from '../../store/thunks/postShowThunk.js';
 import { clearPostShow } from '../../store/slices/postShowSlice.js';
+import { postLikeShowThunk } from '../../store/thunks/postLikeShowThunk.js';
 
 export default function PostsShow() {
   const { id } = useParams();
@@ -13,6 +14,7 @@ export default function PostsShow() {
   const dispatch = useDispatch();
   const { show } = useSelector(state => state.postShow);
   const [openDeleteFlg, setOpenDeleteFlg] = useState(false);
+  const [likeCnt, setLikeCnt] = useState(0);
 
   useEffect(() => {
     async function test() {
@@ -35,7 +37,16 @@ export default function PostsShow() {
   function closeDeleteModal() {
     setOpenDeleteFlg(false);
   }
+  
 
+  const [heartFlg, setHeartFlg] = useState(false);
+  const toggleHeart = async () => {
+    setHeartFlg(heartFlg => !heartFlg);
+    const result = await dispatch(postLikeShowThunk(id)).unwrap();
+    setLikeCnt(result.data.cnt);
+  }
+
+    
   return (
     <>
       {
@@ -46,8 +57,8 @@ export default function PostsShow() {
               <div className="post-show-post-info-items">
                 <div className="icon-delete" onClick={openDeleteModal} ></div>
                 <div className="post-show-post-likes-items">
-                  <p>1919</p>
-                  <div className='icon-heart-fill'></div>
+                  <p>{likeCnt}</p>
+                    <div className={heartFlg ? 'icon-heart-fill' : 'icon-heart-empty'} onClick={toggleHeart}></div>
                 </div>
               </div>
               <textarea className="post-show-post-constent" defaultValue={show.content}></textarea>
