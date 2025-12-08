@@ -18,6 +18,7 @@ import postsRouter from './routes/posts.router.js';
 import cookieParser from 'cookie-parser';
 import commentsRouter from './routes/comments.router.js';
 import usersRouter from './routes/usersRouter.js';
+import subscriptionsRouter from './routes/subscriptions.router.js';
 
 
 const app = express();
@@ -46,6 +47,7 @@ app.use('/api/files', filesRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/subscriptions', subscriptionsRouter);
 
 // ---------------------
 // 404 처리
