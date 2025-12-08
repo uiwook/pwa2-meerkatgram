@@ -102,7 +102,7 @@ const attributes = {
 };
 
 const option = {
-  tablename: 'users', // 실제 DB 테이블명
+  tableName: 'users', // 실제 DB 테이블명
   timestamps: true,   // createdAt, updatedAt를 자동 관리
   paranoid: true,      // soft delete 설정 (deletedAt 자동 관리)
 };

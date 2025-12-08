@@ -81,7 +81,7 @@ const attributes = {
 };
 
 const options = {
-  tablename: 'comments',
+  tableName: 'comments',
   timestamps: true,
   paranoid: true,
 }

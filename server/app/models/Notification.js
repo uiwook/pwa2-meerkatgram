@@ -82,7 +82,7 @@ const attributes = {
 };
 
 const options = {
-  tablename: 'notifications',
+  tableName: 'notifications',
   timestamps: true,
   paranoid: true,
 }

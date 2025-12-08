@@ -75,7 +75,7 @@ const attributes = {
 };
 
 const options = {
-  tablename: 'posts',
+  tableName: 'posts',
   timestamps: true,
   paranoid: true,
 }

@@ -69,7 +69,7 @@ const attributes = {
 };
 
 const options = {
-  tablename: 'likes',
+  tableName: 'likes',
   timestamps: true,
   paranoid: true,
 }
