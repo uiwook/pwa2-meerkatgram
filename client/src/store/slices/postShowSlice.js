@@ -16,7 +16,7 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(postShowThunk.fulfilled, (state, action) => {
-        state.show = action.payload.data;
+        state.show = action.payload.item;
       })
   },
 });

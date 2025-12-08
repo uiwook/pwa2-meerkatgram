@@ -5,7 +5,7 @@
  */
 
 import db from '../models/index.js';
-const { sequelize, Post, Comment, User } = db;
+const { sequelize, Post, Comment, User, Like} = db;
 
 /**
  * 게시글 페이지네이션
@@ -62,11 +62,11 @@ async function findByPkWithComments(t = null, id) {
                   model: User,
                   as: 'author',
                   required: true, // Inner Join 설정
-                }
+                },
               ],
-            }
+            },
           ],
-        }
+        },
       ],
       transaction: t
     });

@@ -8,10 +8,10 @@ export const postShowThunk = createAsyncThunk(
       const url = `/api/posts/${id}`;
       
       const response = await axiosInstance.get(url);
-      if(!response.data.data) {
+      if(!response.data.data.item) {
         throw new Error('게시글 삭제 됨');
       }
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error);
     }

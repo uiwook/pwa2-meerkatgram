@@ -44,7 +44,11 @@ async function index(req, res, next) {
  */
 async function show(req, res, next) {
   try {
-    const result = await postsService.show(req.params.id);
+    const data = {
+      postId: req.params.id,
+      userId: req.user.id
+    }
+    const result = await postsService.show(data);
 
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result))
   } catch (error) {

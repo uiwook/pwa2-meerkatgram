@@ -48,12 +48,12 @@ async function destroyLike(t = null, {userId, postId}) {
  * @param {import("../services/posts.service.type.js").data} data 
  * @returns {Promise<import("../models/Like.js").Like>}
  */
-async function findLikeYN(t = null, data) {
+async function findLikeYN(t = null, {userId, postId}) {
   return await Like.findOne(
     {
       where: {
-        userId: data.userId,
-        postId: data.postId,
+        userId: userId,
+        postId: postId,
       }
     },
     {
@@ -77,14 +77,14 @@ async function create(t = null, data) {
  * @param {import("../services/posts.service.type.js").postId} id 
  * @returns {Promise<import("../models/Like.js").Like>}
  */
-async function show(t = null, {postId}) {
+async function show(t = null, postId) {
   return await Like.count({
     where: {postId},
     transaction: t
   });
 }
 
-// findOne으로 하는방법도 구현해보기
+// // findOne으로 하는방법도 구현해보기
 // async function show(t = null, postId) {
 //   return await Like.findOne({
 //     attributes: ['postId', [sequelize.fn('COUNT', sequelize.col('*')), 'like_cnt']],

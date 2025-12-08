@@ -27,8 +27,16 @@ async function pagination(page) {
  * @param {import("./posts.service.type.js").Id} id 
  * @returns {Promise<import("../models/Post.js").Post>}
  */
-async function show(id) {
-  return await postRepository.findByPkWithComments(null, id);
+async function show({postId, userId}) {
+  return await db.sequelize.transaction(async t => {
+  
+    return {
+      cnt: await likeRepository.show(t, postId),
+      likeFlg: await likeRepository.findLikeYN(t, {userId, postId}),
+      item: await postRepository.findByPkWithComments(null, postId),
+    }
+
+  })
 }
 
 /**
@@ -71,16 +79,20 @@ async function update(data) {
   return await db.sequelize.transaction(async t => {
 
   const likeYN = await likeRepository.findLikeYN(t, data)
+  let likeStatus = '';
   // postId안에 해당하는 userId가 없을 시 insert처리
   if(!likeYN) {
     await likeRepository.create(t, data)
+    likeStatus = true
     // postId안에 해당하는 userId가 있을 시 destroy처리
   } else if(likeYN) {
     await likeRepository.destroyLike(t, data)
+    likeStatus = false
   }
   // postId로 묶고, postId에 좋아요 되어있는 userId갯수 가져오는 처리
-  return {
-    cnt: await likeRepository.show(t, data)
+  return { 
+    likeStatus: likeStatus,
+    cnt: await likeRepository.show(t, data.postId) 
   }
   });
 }

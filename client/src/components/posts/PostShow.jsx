@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PostComment from './comments/PostComment.jsx';
 import './PostShow.css';
 import PostDelete from './PostDelete.jsx';
@@ -15,10 +15,13 @@ export default function PostsShow() {
   const { show } = useSelector(state => state.postShow);
   const [openDeleteFlg, setOpenDeleteFlg] = useState(false);
   const [likeCnt, setLikeCnt] = useState(0);
+  const [heartFlg, setHeartFlg] = useState(false);
 
   useEffect(() => {
     async function test() {
       const result = await dispatch(postShowThunk(id));
+      setLikeCnt(result.payload.cnt);
+      setHeartFlg(result.payload.likeFlg)
       if(result.type.endsWith('/rejected')) {
         alert('없는 페이지입니다.')
         navigate('/posts')
@@ -39,11 +42,12 @@ export default function PostsShow() {
   }
   
 
-  const [heartFlg, setHeartFlg] = useState(false);
   const toggleHeart = async () => {
-    setHeartFlg(heartFlg => !heartFlg);
     const result = await dispatch(postLikeShowThunk(id)).unwrap();
-    setLikeCnt(result.data.cnt);
+    console.log(result)
+    const {cnt, likeStatus} = result.data
+    setHeartFlg(likeStatus);
+    setLikeCnt(cnt);
   }
 
     
