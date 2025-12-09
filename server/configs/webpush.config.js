@@ -4,13 +4,13 @@
  * 251208 v1.0.0 wook init
  */
 
-import webpush from 'webpush';
+import webpush from 'web-push';
 
 // '순서대로' 셋팅하는것이 중요!
-webpush.setVapidDetais(
-  process.env.JWT_ISSURE,
+webpush.setVapidDetails(
+  `mailto:${process.env.JWT_ISSUER}`,
   process.env.VAPID_PUBLIC_KEY,
   process.env.VAPID_PRIVATE_KEY,
 );
 
-export default webpush
+export default webpush;
